@@ -33,8 +33,9 @@
     $('#loadBtn2').remove()
   }
 
+ 
   //
-  // Pretty simple, right?
+    // Pretty simple, right?
   //
   // Next up you will use jQuery AJAX methods to fetch some things from the dog.ceo website.
   // Check out the dog.ceo API here: https://dog.ceo/dog-api/
@@ -71,8 +72,31 @@
   //
 
   // TODO: your code goes here :)
+  var button = $('#generateDoggoBtn').click(clickDoggo)
 
-  //
+  function clickDoggo () {
+
+    $(button).attr('disabled', true)
+    
+    $(button).text('Generating Doggo')
+    
+    
+    var getData = $.getJSON('https://dog.ceo/api/breeds/image/random', function (pic) {
+   
+    $('#doggoContainer').html("<div class =\'imgContainer\'><img src = "+pic.message+"></div>")
+
+        if (pic.status === 'success') {
+
+            $(button).attr('disabled', false)
+            console.log('!!!!')
+            $(button).text('Generate Doggo')
+            console.log('generating doggo')
+        }
+   })
+   
+    console.log('~~~~~~'+ button)
+  }
+
   // Cool. Now let's kick it up a notch and allow selecting a specific breed of dog!
   //
   // 1) Add an empty dropdown menu (ie: <select></select>) to the <div id="selectBreedContainer"> element.
@@ -108,6 +132,38 @@
 
   // TODO: your code goes here :)
 
+  $(function() {
+
+  $.get('https://dog.ceo/api/breeds/list', function (items) {
+          var breeds = items.message
+          breeds.forEach(function (el) {
+          $("#breedSelector").append("<option value="+el+">"+el+"</option>")
+          
+          })
+        
+        })
+  
+  $('#breedSelector').on('change', function () {
+
+    dogBreed = this.value
+    console.log(this.value +' == CL of {this.value}')
+
+    var test = $.getJSON('https://dog.ceo/api/breed/'+dogBreed+'/images/random', function (pic2) {
+
+    var receive = pic2.message
+
+    console.log(receive+' == CL of {receive}')
+
+    $('#breedSelectorImgContainer').html("<img src = "+receive+">")
+
+    })
+
+    console.log(test+' == CL of {test}')
+
+
+
+
+
   //
   // Excellent work!
   //
@@ -115,4 +171,9 @@
   //
   // Next let's look at a new contender that is built into modern browsers: the Fetch API
   //
+
+  })
+})
+  
+
 })()

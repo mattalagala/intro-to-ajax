@@ -93,6 +93,51 @@
 
   // TODO: your code goes here :)
 
+  const buttonGenerateCat = document.getElementById('generateCatBtn')
+  buttonGenerateCat.addEventListener('click', clickGenerateCatBtn)
+  // var myHeaders = new Headers ({
+  //   'Content-Type': 'text/plain',
+  //   'x-api-key': 'fa87d87d-0146-4a3c-b4ac-30e7585fb7c5'
+
+  // })
+
+  function clickGenerateCatBtn () {
+    
+    console.info('Sending the AJAX request now using fetch()!')
+    
+    fetch('https://api.thecatapi.com/v1/images/search?format=json')
+    var myHeaders = new Headers ({
+        'Content-Type': 'text/plain',
+        'x-api-key': 'fa87d87d-0146-4a3c-b4ac-30e7585fb7c5'
+    
+      })
+    .then(getURLData)
+    .then(setImgContainer)
+    
+  }// <-- fetch() returns a Promise object
+      
+      
+  
+
+  function getURLData (response) {
+    
+      console.log('The AJAX request finished. I am the callback from the first Promise object.')
+      console.log(response)
+      return response.text() // <-- returns a new Promise object
+      
+
+  }
+
+
+  function setImgContainer () {
+
+
+
+
+  }
+
+
+
   //
   // What else can you build with your new AJAX knowledge?
   //
@@ -115,4 +160,6 @@
   //
   // Congratulations! You are now an AJAX master.
   //
+
+
 })()

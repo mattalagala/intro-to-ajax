@@ -9,3 +9,21 @@ h1 {
 #jumbotronContainer {
   margin-top: 20px;
 }
+
+.imgContainer {
+
+  padding: 25px;
+
+}
+
+#breedSelector {
+
+  margin-bottom: 25px;
+  vertical-align: middle;
+  position: static;
+}
+
+#breedSelectorImgContainer {
+  max-height: 25em;
+
+}
