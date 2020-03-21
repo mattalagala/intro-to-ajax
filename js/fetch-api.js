@@ -95,47 +95,57 @@
 
   const buttonGenerateCat = document.getElementById('generateCatBtn')
   buttonGenerateCat.addEventListener('click', clickGenerateCatBtn)
-  // var myHeaders = new Headers ({
-  //   'Content-Type': 'text/plain',
-  //   'x-api-key': 'fa87d87d-0146-4a3c-b4ac-30e7585fb7c5'
+  var myHeaders = new Headers ({
+    'Content-Type': 'text/plain',
+    'x-api-key': 'fa87d87d-0146-4a3c-b4ac-30e7585fb7c5'
 
-  // })
+  })
 
   function clickGenerateCatBtn () {
+    $(buttonGenerateCat).attr('disabled', true)
+    
+    $(buttonGenerateCat).text('Generating Cat')
     
     console.info('Sending the AJAX request now using fetch()!')
     
-    fetch('https://api.thecatapi.com/v1/images/search?format=json')
-    var myHeaders = new Headers ({
+    fetch('https://api.thecatapi.com/v1/images/search', {
+      headers: {
         'Content-Type': 'text/plain',
-        'x-api-key': 'fa87d87d-0146-4a3c-b4ac-30e7585fb7c5'
-    
-      })
+        'x-api-key': 'fa87d87d-0146-4a3c-b4ac-30e7585fb7c5'}
+    })    
     .then(getURLData)
     .then(setImgContainer)
     
-  }// <-- fetch() returns a Promise object
-      
-      
+  }
   
-
   function getURLData (response) {
     
       console.log('The AJAX request finished. I am the callback from the first Promise object.')
-      console.log(response)
-      return response.text() // <-- returns a new Promise object
-      
-
+      console.log(response + "this is the RESPONSE CL")
+      console.log(response.headers.get  + 'this is the header response')
+      return response.json() 
   }
 
 
-  function setImgContainer () {
+  function setImgContainer (set) {
 
+    console.log('response.json() has resolved. I am the callback from the second Promise object.')
+    const catContainerElement = document.getElementById('catContainer')
+    catContainerElement.innerHTML = "<div class =\'imgContainer\'><img src = "+ set[0].url+"></div>"
+    
+    console.log('its getting here but no further')
 
+    console.log(set[0].url)
+    
 
+        
 
-  }
+            $(buttonGenerateCat).attr('disabled', false)
+            
+            $(buttonGenerateCat).text('Generate Cat')
 
+            console.log(set)
+        }
 
 
   //
